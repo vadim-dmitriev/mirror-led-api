@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package led_service;
+option go_package = "api/led-service";
+
+
+service LedService {
+    rpc LightLED(LightLEDRequest) returns (LightLEDResponse) {}
+}
+
+message LightLEDRequest {
+    enum LightMode {
+        NO_MODE = 0;
+        KEY_WORD = 1;
+    }
+
+    LightMode mode = 1;
+
+};
+
+message LightLEDResponse {
+    bool success = 1;
+};
