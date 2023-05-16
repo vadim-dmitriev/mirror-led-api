@@ -3,9 +3,9 @@ import time
 import board
 import neopixel
 
-DATA_PIN = 1
+DATA_PIN = board.D18
 NUMBER_OF_LEDS = 102
-ORDER = 2
+ORDER = neopixel.GRB
 
 BRIGHTNESS = 0.5
 
