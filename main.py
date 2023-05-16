@@ -31,6 +31,10 @@ class LedService(led_service_pb2_grpc.LedService):
 
 		return led_service_pb2.LightLEDResponse(success=True)
 
+	def SwitchLED(self, request, context):
+		logging.warning("SwitchLED calls")
+		self.led.Switch()
+
 
 def serve():
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))

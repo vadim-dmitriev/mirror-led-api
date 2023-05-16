@@ -3,9 +3,9 @@ import time
 import board
 import neopixel
 
-DATA_PIN = board.D18
+DATA_PIN = 1
 NUMBER_OF_LEDS = 102
-ORDER = neopixel.GRB
+ORDER = 2
 
 BRIGHTNESS = 0.5
 
@@ -20,7 +20,7 @@ class LedStripe():
 	pixels_state = []
 	number_of_leds = 0
 
-	def __init__(self, data_pin, number_of_leds):
+	def __init__(self, data_pin=DATA_PIN, number_of_leds=NUMBER_OF_LEDS):
 		self.controller = neopixel.NeoPixel(data_pin, number_of_leds, pixel_order=ORDER, auto_write=False, brightness=BRIGHTNESS)
 		self.number_of_leds = number_of_leds
 		self.pixels_state = [NO_COLOR] * self.number_of_leds

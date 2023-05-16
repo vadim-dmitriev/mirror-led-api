@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LedServiceClient interface {
 	LightLED(ctx context.Context, in *LightLEDRequest, opts ...grpc.CallOption) (*LightLEDResponse, error)
+	SwitchLED(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type ledServiceClient struct {
@@ -42,11 +43,21 @@ func (c *ledServiceClient) LightLED(ctx context.Context, in *LightLEDRequest, op
 	return out, nil
 }
 
+func (c *ledServiceClient) SwitchLED(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/led_service.LedService/SwitchLED", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LedServiceServer is the server API for LedService service.
 // All implementations must embed UnimplementedLedServiceServer
 // for forward compatibility
 type LedServiceServer interface {
 	LightLED(context.Context, *LightLEDRequest) (*LightLEDResponse, error)
+	SwitchLED(context.Context, *Empty) (*Empty, error)
 	mustEmbedUnimplementedLedServiceServer()
 }
 
@@ -56,6 +67,9 @@ type UnimplementedLedServiceServer struct {
 
 func (UnimplementedLedServiceServer) LightLED(context.Context, *LightLEDRequest) (*LightLEDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LightLED not implemented")
+}
+func (UnimplementedLedServiceServer) SwitchLED(context.Context, *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SwitchLED not implemented")
 }
 func (UnimplementedLedServiceServer) mustEmbedUnimplementedLedServiceServer() {}
 
@@ -88,6 +102,24 @@ func _LedService_LightLED_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LedService_SwitchLED_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LedServiceServer).SwitchLED(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/led_service.LedService/SwitchLED",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LedServiceServer).SwitchLED(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LedService_ServiceDesc is the grpc.ServiceDesc for LedService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +130,10 @@ var LedService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LightLED",
 			Handler:    _LedService_LightLED_Handler,
+		},
+		{
+			MethodName: "SwitchLED",
+			Handler:    _LedService_SwitchLED_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
