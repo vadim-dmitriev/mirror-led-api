@@ -11,9 +11,10 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11led-service.proto\x12\x0bled_service\"\x07\n\x05\x45mpty\"o\n\x0fLightLEDRequest\x12\x34\n\x04mode\x18\x01 \x01(\x0e\x32&.led_service.LightLEDRequest.LightMode\"&\n\tLightMode\x12\x0b\n\x07NO_MODE\x10\x00\x12\x0c\n\x08KEY_WORD\x10\x01\"#\n\x10LightLEDResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x8e\x01\n\nLedService\x12I\n\x08LightLED\x12\x1c.led_service.LightLEDRequest\x1a\x1d.led_service.LightLEDResponse\"\x00\x12\x35\n\tSwitchLED\x12\x12.led_service.Empty\x1a\x12.led_service.Empty\"\x00\x42\x11Z\x0fpkg/led-serviceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11led-service.proto\x12\x0bled_service\x1a\x1bgoogle/protobuf/empty.proto\"o\n\x0fLightLEDRequest\x12\x34\n\x04mode\x18\x01 \x01(\x0e\x32&.led_service.LightLEDRequest.LightMode\"&\n\tLightMode\x12\x0b\n\x07NO_MODE\x10\x00\x12\x0c\n\x08KEY_WORD\x10\x01\"#\n\x10LightLEDResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x96\x01\n\nLedService\x12I\n\x08LightLED\x12\x1c.led_service.LightLEDRequest\x1a\x1d.led_service.LightLEDResponse\"\x00\x12=\n\tSwitchLED\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x00\x42\x11Z\x0fpkg/led-serviceb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'led_service_pb2', globals())
@@ -21,14 +22,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z\017pkg/led-service'
-  _EMPTY._serialized_start=34
-  _EMPTY._serialized_end=41
-  _LIGHTLEDREQUEST._serialized_start=43
-  _LIGHTLEDREQUEST._serialized_end=154
-  _LIGHTLEDREQUEST_LIGHTMODE._serialized_start=116
-  _LIGHTLEDREQUEST_LIGHTMODE._serialized_end=154
-  _LIGHTLEDRESPONSE._serialized_start=156
-  _LIGHTLEDRESPONSE._serialized_end=191
-  _LEDSERVICE._serialized_start=194
-  _LEDSERVICE._serialized_end=336
+  _LIGHTLEDREQUEST._serialized_start=63
+  _LIGHTLEDREQUEST._serialized_end=174
+  _LIGHTLEDREQUEST_LIGHTMODE._serialized_start=136
+  _LIGHTLEDREQUEST_LIGHTMODE._serialized_end=174
+  _LIGHTLEDRESPONSE._serialized_start=176
+  _LIGHTLEDRESPONSE._serialized_end=211
+  _LEDSERVICE._serialized_start=214
+  _LEDSERVICE._serialized_end=364
 # @@protoc_insertion_point(module_scope)

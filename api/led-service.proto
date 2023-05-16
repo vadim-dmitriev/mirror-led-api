@@ -3,13 +3,12 @@ syntax = "proto3";
 package led_service;
 option go_package = "pkg/led-service";
 
+import "google/protobuf/empty.proto";
 
 service LedService {
     rpc LightLED(LightLEDRequest) returns (LightLEDResponse) {}
-    rpc SwitchLED(Empty) returns (Empty) {}
+    rpc SwitchLED(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
-
-message Empty {};
 
 message LightLEDRequest {
     enum LightMode {

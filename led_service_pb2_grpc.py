@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import led_service_pb2 as led__service__pb2
 
 
@@ -21,8 +22,8 @@ class LedServiceStub(object):
                 )
         self.SwitchLED = channel.unary_unary(
                 '/led_service.LedService/SwitchLED',
-                request_serializer=led__service__pb2.Empty.SerializeToString,
-                response_deserializer=led__service__pb2.Empty.FromString,
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
 
@@ -51,8 +52,8 @@ def add_LedServiceServicer_to_server(servicer, server):
             ),
             'SwitchLED': grpc.unary_unary_rpc_method_handler(
                     servicer.SwitchLED,
-                    request_deserializer=led__service__pb2.Empty.FromString,
-                    response_serializer=led__service__pb2.Empty.SerializeToString,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -93,7 +94,7 @@ class LedService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/led_service.LedService/SwitchLED',
-            led__service__pb2.Empty.SerializeToString,
-            led__service__pb2.Empty.FromString,
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

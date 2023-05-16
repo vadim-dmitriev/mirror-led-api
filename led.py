@@ -25,9 +25,18 @@ class LedStripe():
 		self.number_of_leds = number_of_leds
 		self.pixels_state = [NO_COLOR] * self.number_of_leds
 
+		for i, pixel in enumerate(self.pixels_state):
+			self.controller[i] = pixel
+		
 		self.controller.show()
 
 	def __del__(self):
+		self.pixels_state = [NO_COLOR] * self.number_of_leds
+
+		for i, pixel in enumerate(self.pixels_state):
+			self.controller[i] = pixel
+		self.controller.show()
+
 		self.controller.deinit()
 
 	def Fill(self, color, is_slowly):
@@ -61,10 +70,11 @@ class LedStripe():
 			self.pixels_state = new_pixels_state
 			return
 
+		self.pixels_state = new_pixels_state
+
 		for i, pixel in enumerate(self.pixels_state):
 			self.controller[i] = pixel
 
-		self.pixels_state = new_pixels_state
 		self.controller.show()
 
 
