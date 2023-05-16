@@ -8,6 +8,7 @@ package led_service
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LedServiceClient interface {
 	LightLED(ctx context.Context, in *LightLEDRequest, opts ...grpc.CallOption) (*LightLEDResponse, error)
-	SwitchLED(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	SwitchLED(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type ledServiceClient struct {
@@ -43,8 +44,8 @@ func (c *ledServiceClient) LightLED(ctx context.Context, in *LightLEDRequest, op
 	return out, nil
 }
 
-func (c *ledServiceClient) SwitchLED(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *ledServiceClient) SwitchLED(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/led_service.LedService/SwitchLED", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -57,7 +58,7 @@ func (c *ledServiceClient) SwitchLED(ctx context.Context, in *Empty, opts ...grp
 // for forward compatibility
 type LedServiceServer interface {
 	LightLED(context.Context, *LightLEDRequest) (*LightLEDResponse, error)
-	SwitchLED(context.Context, *Empty) (*Empty, error)
+	SwitchLED(context.Context, *empty.Empty) (*empty.Empty, error)
 	mustEmbedUnimplementedLedServiceServer()
 }
 
@@ -68,7 +69,7 @@ type UnimplementedLedServiceServer struct {
 func (UnimplementedLedServiceServer) LightLED(context.Context, *LightLEDRequest) (*LightLEDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LightLED not implemented")
 }
-func (UnimplementedLedServiceServer) SwitchLED(context.Context, *Empty) (*Empty, error) {
+func (UnimplementedLedServiceServer) SwitchLED(context.Context, *empty.Empty) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SwitchLED not implemented")
 }
 func (UnimplementedLedServiceServer) mustEmbedUnimplementedLedServiceServer() {}
@@ -103,7 +104,7 @@ func _LedService_LightLED_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _LedService_SwitchLED_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,7 +116,7 @@ func _LedService_SwitchLED_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/led_service.LedService/SwitchLED",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LedServiceServer).SwitchLED(ctx, req.(*Empty))
+		return srv.(LedServiceServer).SwitchLED(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
